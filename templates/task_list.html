@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="text-center p-3" style="background-color: #79258e; color: white;">Task List</h2>
+<a href="{% url 'task_new' %}" class="btn btn-primary" style="background-color: #c065d7; border-color: #c065d7;">Add New Task</a>
+
+<br><br>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Completed</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for task in tasks %}
+    <tr>
+      <td>{{ task.title }}</td>
+      <td>{{ task.description }}</td>
+      <td>{% if task.completed %}Completed{% else %}Pending{% endif %}</td>
+      <style>
+        .btn-group a {
+            margin-right: 5px; 
+        }
+    
+        
+    </style>
+    
+    <td class="btn-group">
+        
+            <a href="{% url 'task_edit' task.pk %}" class="btn btn-warning btn-sm" style="background-color: #ba55d3; border-color: #ba55d3; color:white">Edit</a>
+            <a href="{% url 'task_delete' task.pk %}" class="btn btn-danger btn-sm" style="background-color: #d355cd; border-color: #d355cd;">Delete</a>
+       
+        
+    </td>
+    
+    
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
